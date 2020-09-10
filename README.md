@@ -230,6 +230,144 @@ My study nodes in angular 9
                   { path: 'logout', component: LogoutComponent, canActivate: [RouteGuardService]},
                   { path: '**', component: ErrorComponent}
               ];
+              
+              
+         - Getting welcome message, Connect Angular frontend to spring boot Restful API
+         ==================================================================================
+              . can subscribe many times, check in chrome Inspect->Network
+              . @CrossOrigin(origins="http://localhost:4200") - to use another server
+         
+            In spring boot ----->
+            
+                  package com.ssh.angular;
+                  import org.springframework.web.bind.annotation.GetMapping;
+                  import org.springframework.web.bind.annotation.PathVariable;
+                  import org.springframework.web.bind.annotation.RestController;
+
+                  //Controller
+                  @CrossOrigin(origins="http://localhost:4200")
+                  @RestController
+                  public class HelloWoldController {
+                    //GET
+                    // URI - /hello-world
+                    // method - "Hello World"
+                    //	@RequestMapping(method = RequestMethod.GET, path = "/hello-world")
+                    @GetMapping(path = "/hello-world")
+                    public String helloWorld() {
+                      return "Hello World";
+                    }
+
+
+                    // hello world bean
+                    @GetMapping(path = "hello-world-bean")
+                    public HelloWorlBean helloWorldBean() {
+                      return new HelloWorlBean("Hello World");
+                    }
+
+                    // hello-world/path-variable/shwesin
+                    @GetMapping(path = "/hello-world/path-variable/{name}")
+                    public HelloWorlBean helloWorldPathVariable(@PathVariable String name) {
+                      return new HelloWorlBean(String.format("Hello World, %s", name));
+                    }
+                  }
+                  -------------------------------------------------------------------------------------------
+                  package com.ssh.angular;
+
+                  public class HelloWorlBean {
+
+                    private String message;
+
+                    public HelloWorlBean(String message) {
+                      this.message = message;
+                    }
+
+                    public String getMessage() {
+                      return message;
+                    }
+
+                    public void setMessage(String message) {
+                      this.message = message;
+                    }
+
+                    @Override
+                    public String toString() {
+                      //return "HelloWorlBean [message=" + message + "]";
+                      return String.format("HelloWorldBean [message=%s]",message);
+                    }
+                  }
+
+
+            In angular ----->
+            
+            1) in welcome.component.ts:
+            
+                welcomeMessageFromService: string;
+                constructor(private route: ActivatedRoute,
+                            private service: WelcomeDataService) { }
+                            
+                -----------------------------------------------------
+                
+               getWelcomeMessage() {
+                  // console.log(' Welcome message ' );
+                  console.log(this.service.executeHelloWorldBeanService());
+                  // can subscribe many times, check in chrome Inspect->Network
+                  this.service.executeHelloWorldBeanService().subscribe(
+                    response => this.handleSuccessfulResponse(response)
+                  );
+
+                  console.log('last line of getWelcomeMessage');
+                }
+                handleSuccessfulResponse(response) {
+                  // console.log(response);
+                  // console.log(response.message);
+                  this.welcomeMessageFromService = response.message;
+                }
+             
+           2)in welcome.component.html:
+           
+                <h3>Click here to customized welcome message -
+                    <button (click)="getWelcomeMessage()" class="btn btn-primary">Welcome Message </button>
+                </h3><br />
+
+                <h3 *ngIf='welcomeMessageFromService'>Your customized welcome message -
+                    <p class="text-success">{{ welcomeMessageFromService }}</p>
+                </h3>
+                
+           3)in welcome-data.service.ts:
+           
+                import { Injectable } from '@angular/core';
+                import { HttpClient } from '@angular/common/http';
+
+                export class HelloWorldBean {
+                  constructor( public message: string) { }
+                }
+
+                @Injectable({
+                  providedIn: 'root'
+                })
+                export class WelcomeDataService {
+
+                  constructor(
+                    private http: HttpClient
+                  ) { }
+
+                  executeHelloWorldBeanService() {
+                    // console.log('Execute Hello World Bean Service');
+                    return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean');
+                  }
+                }
+
+                
+                
+            4)In app.module.ts, imports HttpClientModule :
+            
+                imports: [
+                    BrowserModule,
+                    AppRoutingModule,
+                    FormsModule,
+                    HttpClientModule
+                  ],
+
 
               
               
@@ -257,8 +395,9 @@ My study nodes in angular 9
      - Create Service
      =================
      
-          -hardcodedAuthentication
-          -routeGuard
+          -ng g service service/hardcodedAuthentication
+          -ng g service service/routeGuard
+          -ng g service service/data/welcomeData
 
 
 
