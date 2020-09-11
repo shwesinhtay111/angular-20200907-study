@@ -7,6 +7,12 @@ Code install in your local
     3)ng serve
     
     4)localhost:4200 type in your browser, will open angular ui
+    
+  Code Link
+  ==============
+   . Frontend is here
+   
+   . Backend is 
 
 
 My study nodes in angular 9
@@ -423,6 +429,8 @@ My study nodes in angular 9
                   <button (click)="getWelcomeMessageWithPathVariable()" class="btn btn-primary">Welcome Message </button>
                 </h3><br />
 
+          - Designing restful service for todo resource in spring boot
+              1) Create todo package(Todo-class,service,controller) in backend
 
               
               
@@ -453,6 +461,7 @@ My study nodes in angular 9
           -ng g service service/hardcodedAuthentication
           -ng g service service/routeGuard
           -ng g service service/data/welcomeData
+          -ng g service service/data/todoData
 
 
 
