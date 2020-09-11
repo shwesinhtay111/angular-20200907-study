@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoDataService } from '../service/data/todo-data.service';
 export class Todo {
   constructor(
     public id: number,
@@ -13,23 +14,33 @@ export class Todo {
   styleUrls: ['./list-todos.component.css']
 })
 export class ListTodosComponent implements OnInit {
-  todos = [
-    new Todo(1, 'Learn to Dance', false, new Date()),
-    new Todo(2, 'Learn to Angular', false, new Date()),
-    new Todo(3, 'Learn to React', false, new Date()),
-    new Todo(4, 'Learn to Spring Boot', false, new Date())
-    // { id: 1, description: 'Learn to Dance' },
-    // { id: 2, description: 'Learn to Angular' },
-    // { id: 3, description: 'Learn to Spring Boot' },
-    // { id: 4, description: 'Learn to React' }
-  ];
+  todos: Todo[];
+  // todos = [
+  //   new Todo(1, 'Learn to Dance', false, new Date()),
+  //   new Todo(2, 'Learn to Angular', false, new Date()),
+  //   new Todo(3, 'Learn to React', false, new Date()),
+  //   new Todo(4, 'Learn to Spring Boot', false, new Date())
+  //   // { id: 1, description: 'Learn to Dance' },
+  //   // { id: 2, description: 'Learn to Angular' },
+  //   // { id: 3, description: 'Learn to Spring Boot' },
+  //   // { id: 4, description: 'Learn to React' }
+  // ];
   // todo = {
   //   id: 1,
   //   description: 'Learn to Dance'
   // };
-  constructor() { }
+  constructor(
+    private todoService: TodoDataService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.todoService.retrieveAllTodos('shwesin').subscribe(
+      response => {
+        console.log(response);
+        this.todos = response;
+      }
+    );
+
   }
 
 }
