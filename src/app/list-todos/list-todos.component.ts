@@ -6,7 +6,7 @@ export class Todo {
     public description: string,
     public done: boolean,
     public targetDate: Date
-  ) {}
+  ) { }
 }
 @Component({
   selector: 'app-list-todos',
@@ -14,6 +14,7 @@ export class Todo {
   styleUrls: ['./list-todos.component.css']
 })
 export class ListTodosComponent implements OnInit {
+  message: string;
   todos: Todo[];
   // todos = [
   //   new Todo(1, 'Learn to Dance', false, new Date()),
@@ -34,13 +35,33 @@ export class ListTodosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.refreshTodos();
+    // this.todoService.retrieveAllTodos('shwesin').subscribe(
+    //   response => {
+    //     console.log(response);
+    //     this.todos = response;
+    //   }
+    // );
+
+
+  }
+  refreshTodos() {
     this.todoService.retrieveAllTodos('shwesin').subscribe(
       response => {
         console.log(response);
         this.todos = response;
       }
     );
-
+  }
+  deleteTodo(id) {
+    console.log(`Delete to do ${id}`);
+    this.todoService.deleteTodo('shwesin', id).subscribe(
+      response => {
+        console.log(response);
+        this.message = `Delete of Todo ${id} Successful`;
+        this.refreshTodos();
+      }
+    );
   }
 
 }
