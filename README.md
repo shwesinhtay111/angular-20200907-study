@@ -20,7 +20,41 @@ My study nodes in angular 9
     -  Angular knowledge Should know:
     ===================================
     ===================================
-    
+          -angular template binging
+          ===========================
+            . For form, #todoForm="ngForm", check by -> *ngIf="todoForm.dirty && todoForm.invalid"
+            . For ngModel two way binding, #description="ngModel" [(ngModel)]="todo.description", check by -> description.invalid"
+            
+              <div class="container">
+                  <br />
+                  <h1>Todo Task Creation</h1><br />
+                  <hr><br />
+                  <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter valid values</div>
+                  <div class="alert alert-warning" *ngIf="todoForm.dirty && targetDate.invalid">Enter valid targetDate</div>
+                  <div class="alert alert-warning" *ngIf="todoForm.dirty && description.invalid">Enter at least 10 length</div>
+                  <form (ngSubmit)="!todoForm.invalid && saveTodo()" #todoForm="ngForm">
+                      <fieldset class="form-group">
+                          <label>Description </label>
+                          <input type="text" #description="ngModel" [(ngModel)]="todo.description" name="description" required class="form-control" minlength="10">
+                      </fieldset>
+                      <fieldset class="form-group">
+                          <label>Target Date </label>
+                          <input type="date" #targetDate="ngModel" [ngModel]="todo.targetDate | date: 'yyyy-mm-dd'"
+                              (ngModelChange)="todo.targetDate = $event" name="targetDate" required class="form-control">
+                      </fieldset>
+                      <button type="submit" class="btn btn-primary">Save</button>
+                  </form>
+
+              </div>
+              
+              
+          -angular build in form css validation
+          ======================================
+          
+            .ng-invalid:not(form){
+                border-left: 5px solid red;
+            }
+
           -properties binding, event binding and two-way binding
           =======================================================
             <small *ngIf = 'invalidLogin'>{{errorMessage}}</small>
