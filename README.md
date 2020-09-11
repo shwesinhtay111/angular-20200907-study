@@ -367,6 +367,61 @@ My study nodes in angular 9
                     FormsModule,
                     HttpClientModule
                   ],
+                  
+                  
+          - Handle Error Response
+          ========================
+            1) In spring boot controller,
+              @GetMapping(path = "hello-world-bean")
+              public HelloWorlBean helloWorldBean() {
+                throw new RuntimeException ("Some Error has Happened");
+                // return new HelloWorlBean("Hello World Service");
+              }
+              
+            2)In angular welcome.component.ts,
+              handleErrorResponse(error) {
+                console.log(error);
+                console.log(error.error);
+                console.log(error.error.message); 
+                this.welcomeMessageFromService = error.error.message;
+             }
+             
+             -------------------------------
+             
+             getWelcomeMessage() {
+                // console.log(' Welcome message ' );
+                console.log(this.service.executeHelloWorldBeanService());
+                // can subscribe many times, check in chrome Inspect->Network
+                this.service.executeHelloWorldBeanService().subscribe(
+                  response => this.handleSuccessfulResponse(response),
+                  error => this.handleErrorResponse(error)
+                  );
+
+                console.log('last line of getWelcomeMessage');
+              }
+
+        - Call HTTP Service with path variable
+            1)In welcome-data.service.ts,
+                executeHelloWorldServiceWithPathVariable(name) {
+                    // console.log('Execute Hello World Bean Service');
+                    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/path-variable/${name}`);
+                  }
+              
+            2) In welcome.component.ts,
+                getWelcomeMessageWithPathVariable() {
+                    // console.log(' Welcome message ' );
+                    console.log(this.service.executeHelloWorldBeanService());
+                    // can subscribe many times, check in chrome Inspect->Network
+                    this.service.executeHelloWorldServiceWithPathVariable(this.name).subscribe(
+                      response => this.handleSuccessfulResponse(response),
+                      error => this.handleErrorResponse(error)
+                      );
+                  }
+                
+             3) In welcome.component.html,
+                <h3>Click here to customized welcome message -
+                  <button (click)="getWelcomeMessageWithPathVariable()" class="btn btn-primary">Welcome Message </button>
+                </h3><br />
 
 
               
