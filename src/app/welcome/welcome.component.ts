@@ -26,15 +26,31 @@ export class WelcomeComponent implements OnInit {
     console.log(this.service.executeHelloWorldBeanService());
     // can subscribe many times, check in chrome Inspect->Network
     this.service.executeHelloWorldBeanService().subscribe(
-      response => this.handleSuccessfulResponse(response)
-    );
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
+      );
 
     console.log('last line of getWelcomeMessage');
+  }
+  getWelcomeMessageWithPathVariable() {
+    // console.log(' Welcome message ' );
+    console.log(this.service.executeHelloWorldBeanService());
+    // can subscribe many times, check in chrome Inspect->Network
+    this.service.executeHelloWorldServiceWithPathVariable(this.name).subscribe(
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
+      );
   }
   handleSuccessfulResponse(response) {
     // console.log(response);
     // console.log(response.message);
     this.welcomeMessageFromService = response.message;
   }
+  handleErrorResponse(error) {
+    console.log(error);
+    console.log(error.error);
+    console.log(error.error.message); 
+    this.welcomeMessageFromService = error.error.message;
+ }
 
 }

@@ -5,12 +5,12 @@
     </h3><br />
 
     <h3>Click here to customized welcome message -
-        <button (click)="getWelcomeMessage()" class="btn btn-primary">Welcome Message </button>
+        <button (click)="getWelcomeMessageWithPathVariable()" class="btn btn-primary">Welcome Message </button>
     </h3><br />
 
     <h3 *ngIf='welcomeMessageFromService'>Your customized welcome message -
         <p class="text-success">{{ welcomeMessageFromService }}</p>
     </h3>
-    
+
 
 </div>
