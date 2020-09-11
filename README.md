@@ -446,7 +446,7 @@ My study nodes in angular 9
     
       - Create components
       ====================
-      
+      . ng g component name
           - welcome
           - login
           - error
@@ -454,6 +454,7 @@ My study nodes in angular 9
           - menu
           - footer
           - logout
+          - todo
           
      - Create Service
      =================
