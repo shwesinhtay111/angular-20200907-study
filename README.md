@@ -20,7 +20,7 @@ My study nodes in angular 9
     -  Angular knowledge Should know:
     ===================================
     ===================================
-          -angular template binging
+          -angular template binding
           ===========================
             . For form, #todoForm="ngForm", check by -> *ngIf="todoForm.dirty && todoForm.invalid"
             . For ngModel two way binding, #description="ngModel" [(ngModel)]="todo.description", check by -> description.invalid"
