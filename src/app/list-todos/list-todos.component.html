@@ -1,8 +1,7 @@
 <div class="container">
     <div class="container">
-        <hr ><br />
-        <h1 class="alert alert-success text-center" *ngIf='message'>{{message}}</h1><br/>
-        <hr>
+        <br />
+        <p class="alert alert-success text-center" *ngIf='message'>{{message}}</p><br/>
     </div>
     <h1>My to do tasks</h1><br />
     <hr>
@@ -15,7 +14,8 @@
                 <th>Description</th>
                 <th>Target Date</th>
                 <th>Is Completed ?</th>
-                <th>Delete Todo</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +24,7 @@
                 <td>{{todo.description}}</td>
                 <td>{{todo.targetDate | date |uppercase}}</td>
                 <td>{{todo.done}}</td>
+                <td><button (click)="updateTodo(todo.id)" class="btn btn-primary">Update</button></td>
                 <td><button (click)="deleteTodo(todo.id)" class="btn btn-danger">Delete</button></td>
             </tr>
         </tbody>
