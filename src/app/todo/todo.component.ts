@@ -29,7 +29,8 @@ export class TodoComponent implements OnInit {
 
   saveTodo() {
     // console.log('save todo');
-    if (this.id === -1) {
+    // tslint:disable-next-line: triple-equals
+    if (this.id == -1) {
       // Create Todo
       this.todoService.createTodo('shwesin', this.todo).subscribe(
         data => {
