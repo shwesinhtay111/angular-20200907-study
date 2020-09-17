@@ -1,3 +1,6 @@
+username: shwesin
+password: shwesin
+
 Code install in your local
 ============================
     1)git clone myrepository
