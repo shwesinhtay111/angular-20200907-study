@@ -7,7 +7,7 @@ Run guide:
 
   run angular - ng serve
   
-  run spring boot - run prject 
+  run spring boot - run project 
   
   h2 database connect - http://localhost:8080/h2-console/
   
