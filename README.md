@@ -2,6 +2,16 @@ username: shwesin
 
 password: shwesin
 
+Run guide:
+
+  run angular - ng serve
+  
+  run spring boot - run prject 
+  
+  h2 database connect - http://localhost:8080/h2-console/
+  
+                      -db url  - jdbc:h2:mem:testdb
+
 Code install in your local
 ============================
     1)git clone myrepository
