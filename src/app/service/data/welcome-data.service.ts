@@ -35,8 +35,8 @@ export class WelcomeDataService {
   }
 
   // createBasicAuthenticationHttpHeader() {
-  //   let username = 'in28minutes'
-  //   let password = 'dummy'
+  //   let username = 'shwesin'
+  //   let password = 'shwesin'
   //   let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
   //   return basicAuthHeaderString;
   // }

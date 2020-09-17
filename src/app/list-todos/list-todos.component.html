@@ -21,7 +21,7 @@
             <tr *ngFor='let todo of todos'>
                 <td>{{todo.id}}</td>
                 <td>{{todo.description}}</td>
-                <td>{{todo.targetDate | date |uppercase}}</td>
+                <td>{{todo.targetDate | date:'dd/MM/yyyy'}}</td>
                 <td>{{todo.done}}</td>
                 <td><button (click)="updateTodo(todo.id)" class="btn btn-primary">Update</button></td>
                 <td><button (click)="deleteTodo(todo.id)" class="btn btn-danger">Delete</button></td>
